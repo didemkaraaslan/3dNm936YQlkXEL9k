@@ -3,6 +3,8 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { ButtonGroup, Button } from "@material-ui/core";
 import { Add, Remove } from "@material-ui/icons/";
 import { purple } from "@material-ui/core/colors";
+import { INCREASE, DECREASE } from "../../actions";
+import { SECONDS } from "../../types";
 
 const ColorButton = withStyles((theme) => ({
   root: {
@@ -20,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Second = ({ seconds, handleSecondsUpdate }) => {
+const Second = ({ seconds, handleUpdate }) => {
   const classes = useStyles();
   return (
     <div>
@@ -36,14 +38,14 @@ const Second = ({ seconds, handleSecondsUpdate }) => {
         <ColorButton
           variant="text"
           size="small"
-          onClick={() => handleSecondsUpdate("increase")}
+          onClick={() => handleUpdate(INCREASE, SECONDS)}
         >
           <Add />
         </ColorButton>
         <ColorButton
           variant="text"
           size="small"
-          onClick={() => handleSecondsUpdate("decrease")}
+          onClick={() => handleUpdate(DECREASE, SECONDS)}
         >
           <Remove />
         </ColorButton>

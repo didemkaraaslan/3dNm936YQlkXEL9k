@@ -7,6 +7,9 @@ import Hour from "./components/counter/Hour";
 import Minute from "./components/counter/Minute";
 import Second from "./components/counter/Second";
 import { grey } from "@material-ui/core/colors";
+import { INCREASE, DECREASE } from "./actions";
+import { HOURS, MINUTES, SECONDS } from "./types";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -69,37 +72,19 @@ const App = () => {
     }, 1000);
   };
 
-  const handleHoursUpdate = (updateType) => {
+  const handleUpdate = (action, type) => {
     let newDate;
-    if (updateType === "increase") {
-      newDate = date.add(1, "hours");
-    } else {
-      newDate = date.subtract(1, "hours");
+    switch (action) {
+      case INCREASE:
+        console.log("hl");
+        newDate = date.add(1, type);
+        setDate(newDate);
+        return;
+      case DECREASE:
+        newDate = date.subtract(1, type);
+        setDate(newDate);
+        return;
     }
-
-    setDate(newDate);
-  };
-
-  const handleMinutesUpdate = (updateType) => {
-    let newDate;
-    if (updateType === "increase") {
-      newDate = date.add(1, "minutes");
-    } else {
-      newDate = date.subtract(1, "minutes");
-    }
-
-    setDate(newDate);
-  };
-
-  const handleSecondsUpdate = (updateType) => {
-    let newDate;
-    if (updateType === "increase") {
-      newDate = date.add(1, "seconds");
-    } else {
-      newDate = date.subtract(1, "seconds");
-    }
-
-    setDate(newDate);
   };
 
   return (
@@ -107,17 +92,11 @@ const App = () => {
       <Grid container justify="center" className={classes.container}>
         <Grid item>
           <div className={classes.timer}>
-            <Hour hours={hours} handleHoursUpdate={handleHoursUpdate} />
+            <Hour hours={hours} handleUpdate={handleUpdate} />
             <span>:</span>
-            <Minute
-              minutes={minutes}
-              handleMinutesUpdate={handleMinutesUpdate}
-            />
+            <Minute minutes={minutes} handleUpdate={handleUpdate} />
             <span>:</span>
-            <Second
-              seconds={seconds}
-              handleSecondsUpdate={handleSecondsUpdate}
-            />
+            <Second seconds={seconds} handleUpdate={handleUpdate} />
           </div>
         </Grid>
         <Grid item>
