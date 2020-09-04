@@ -36,6 +36,9 @@ const useStyles = makeStyles((theme) => ({
 
 const App = () => {
   const classes = useStyles();
+  const [date, setDate] = useState(() => {
+    return moment().add(10, "hours");
+  });
   const [hours, setHours] = useState("00");
   const [minutes, setMinutes] = useState("00");
   const [seconds, setSeconds] = useState("00");
@@ -45,14 +48,12 @@ const App = () => {
   useEffect(() => {
     startCountdown();
     return clearInterval(interval.current);
-  }, []);
+  }, [date]);
 
   const startCountdown = () => {
-    const countdownDate = moment().add(10, "hours");
-
     interval = setInterval(() => {
       const now = moment();
-      const distance = countdownDate - now;
+      const distance = date - now;
 
       const hours = moment.duration(distance).hours();
       const minutes = moment.duration(distance).minutes();
@@ -68,14 +69,37 @@ const App = () => {
     }, 1000);
   };
 
-  const handleHoursUpdate = () => {};
+  const handleHoursUpdate = (updateType) => {
+    let newDate;
+    if (updateType === "increase") {
+      newDate = date.add(1, "hours");
+    } else {
+      newDate = date.subtract(1, "hours");
+    }
 
-  const handleMinutesUpdate = () => {};
+    setDate(newDate);
+  };
+
+  const handleMinutesUpdate = (updateType) => {
+    let newDate;
+    if (updateType === "increase") {
+      newDate = date.add(1, "minutes");
+    } else {
+      newDate = date.subtract(1, "minutes");
+    }
+
+    setDate(newDate);
+  };
 
   const handleSecondsUpdate = (updateType) => {
+    let newDate;
     if (updateType === "increase") {
+      newDate = date.add(1, "seconds");
     } else {
+      newDate = date.subtract(1, "seconds");
     }
+
+    setDate(newDate);
   };
 
   return (

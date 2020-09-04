@@ -34,10 +34,18 @@ const Hour = ({ hours, handleHoursUpdate }) => {
         aria-label="contained primary button group"
         className={classes.margin}
       >
-        <ColorButton variant="text" size="small">
+        <ColorButton
+          variant="text"
+          size="small"
+          onClick={() => handleHoursUpdate("increase")}
+        >
           <Add />
         </ColorButton>
-        <ColorButton variant="text" size="small">
+        <ColorButton
+          variant="text"
+          size="small"
+          onClick={() => handleHoursUpdate("decrease")}
+        >
           <Remove />
         </ColorButton>
       </ButtonGroup>
