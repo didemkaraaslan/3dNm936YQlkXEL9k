@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Hour from "./Hour";
 import Minute from "./Minute";
 import Second from "./Second";
-import { grey } from "@material-ui/core/colors";
 import { INCREASE, DECREASE } from "../../actions";
 
 const useStyles = makeStyles((theme) => ({
@@ -12,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
+    marginTop: theme.spacing(8),
     width: "470px",
     border: "1px solid #DA22FF",
     borderRadius: 4,

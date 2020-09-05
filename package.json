@@ -9,6 +9,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "axios": "^0.20.0",
+    "classnames": "^2.2.6",
     "fg-loadcss": "^3.1.0",
     "moment": "^2.27.0",
     "momentjs": "^2.0.0",

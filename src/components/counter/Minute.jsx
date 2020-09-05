@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { ButtonGroup, Button } from "@material-ui/core";
 import { Add, Remove } from "@material-ui/icons/";

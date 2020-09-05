@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import cx from "classnames";
 import { loadCSS } from "fg-loadcss";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,20 +8,26 @@ import {
   Card,
   CardHeader,
   CardContent,
-  CardMedia,
   Icon,
-  Avatar,
-  IconButton,
   Typography,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    margin: theme.spacing(2),
+    marginTop: theme.spacing(8),
   },
-  title: {
-    fontSize: 22,
+  card: {
+    minWidth: 300,
+    minHeight: 150,
+  },
+  update: {
+    background: "#ad5389" /* fallback for old browsers */,
+    background:
+      "-webkit-linear-gradient(to right, #3c1053, #ad5389)" /* Chrome 10-25, Safari 5.1-6 */,
+    background:
+      "linear-gradient(to right, #3c1053, #ad5389)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
+    transition: "background 1s ease-out",
   },
 }));
 
@@ -28,6 +35,7 @@ const Bitcoin = () => {
   const classes = useStyles();
 
   const [data, setData] = useState({});
+  const [updated, setUpdated] = useState(false);
   let interval = useRef();
 
   useEffect(() => {
@@ -51,26 +59,39 @@ const Bitcoin = () => {
   const fetchBitcoinPrices = () => {
     axios.get("http://api.coindesk.com/v1/bpi/currentprice.json").then(
       ({ data }) => {
+        setTimeout(() => {
+          setUpdated(false);
+        }, 1000);
+
         setData(data.bpi);
       },
       (error) => {
         console.error(error);
+        setTimeout(() => {
+          setUpdated(false);
+        }, 1000); // Add 1 sec delay so that user can see  background transition
       }
     );
   };
 
   const setBitcoinInterval = () => {
     interval = setInterval(() => {
+      setUpdated(true);
       fetchBitcoinPrices();
     }, 60 * 1000); // Every minute the prices get updated ( as the api documentation says )
   };
 
+  const cardClasses = cx({
+    [classes.card]: true,
+    [classes.update]: updated,
+  });
+
   const { USD, GBP, EUR } = data;
 
   return (
-    <Grid container justify="center" spacing={6} className={classes.root}>
+    <Grid container justify="center" spacing={4} className={classes.root}>
       <Grid item>
-        <Card>
+        <Card className={cardClasses}>
           <CardHeader
             avatar={<Icon className="fas fa-dollar-sign" color="primary" />}
             title={
@@ -84,7 +105,7 @@ const Bitcoin = () => {
         </Card>
       </Grid>
       <Grid item>
-        <Card>
+        <Card className={cardClasses}>
           <CardHeader
             avatar={<Icon className="fas fa-pound-sign" color="primary" />}
             title={
@@ -98,7 +119,7 @@ const Bitcoin = () => {
         </Card>
       </Grid>
       <Grid item>
-        <Card>
+        <Card className={cardClasses}>
           <CardHeader
             avatar={<Icon className="fas fa-euro-sign" color="primary" />}
             title={
