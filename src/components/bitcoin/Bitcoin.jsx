@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { loadCSS } from "fg-loadcss";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
@@ -26,7 +26,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Bitcoin = () => {
   const classes = useStyles();
+
   const [data, setData] = useState({});
+  let interval = useRef();
 
   useEffect(() => {
     const node = loadCSS(
@@ -40,6 +42,13 @@ const Bitcoin = () => {
   }, []);
 
   useEffect(() => {
+    fetchBitcoinPrices();
+    setBitcoinInterval();
+
+    return clearInterval(interval.current);
+  }, []);
+
+  const fetchBitcoinPrices = () => {
     axios.get("http://api.coindesk.com/v1/bpi/currentprice.json").then(
       ({ data }) => {
         setData(data.bpi);
@@ -48,7 +57,13 @@ const Bitcoin = () => {
         console.error(error);
       }
     );
-  }, []);
+  };
+
+  const setBitcoinInterval = () => {
+    interval = setInterval(() => {
+      fetchBitcoinPrices();
+    }, 60 * 1000); // Every minute the prices get updated ( as the api documentation says )
+  };
 
   const { USD, GBP, EUR } = data;
 
