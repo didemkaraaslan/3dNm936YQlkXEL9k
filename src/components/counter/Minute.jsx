@@ -2,16 +2,16 @@ import React from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { ButtonGroup, Button } from "@material-ui/core";
 import { Add, Remove } from "@material-ui/icons/";
-import { purple } from "@material-ui/core/colors";
+import { indigo } from "@material-ui/core/colors";
 import { INCREASE, DECREASE } from "../../actions";
 import { MINUTES } from "../../types";
 
 const ColorButton = withStyles((theme) => ({
   root: {
-    color: theme.palette.getContrastText(purple[500]),
-    backgroundColor: purple[500],
+    color: theme.palette.getContrastText(indigo[500]),
+    backgroundColor: indigo[500],
     "&:hover": {
-      backgroundColor: purple[700],
+      backgroundColor: indigo[700],
     },
   },
 }))(Button);

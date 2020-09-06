@@ -13,17 +13,11 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     marginTop: theme.spacing(8),
     width: "470px",
-    border: "1px solid #DA22FF",
+    border: "1px solid #fff",
     borderRadius: 4,
-    padding: theme.spacing(3),
-    fontSize: 17,
+    padding: theme.spacing(6),
+    fontSize: 22,
     color: "#fff",
-    opacity: "90%",
-    background: "#DA22FF" /* fallback for old browsers */,
-    background:
-      "-webkit-linear-gradient(to right, #9733EE, #DA22FF)" /* Chrome 10-25, Safari 5.1-6 */,
-    background:
-      "linear-gradient(to right, #9733EE, #DA22FF)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
   },
 }));
 
