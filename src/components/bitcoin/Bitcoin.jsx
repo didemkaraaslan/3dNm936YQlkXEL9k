@@ -22,12 +22,8 @@ const useStyles = makeStyles((theme) => ({
     minHeight: 150,
   },
   update: {
-    background: "#ad5389" /* fallback for old browsers */,
-    background:
-      "-webkit-linear-gradient(to right, #3c1053, #ad5389)" /* Chrome 10-25, Safari 5.1-6 */,
-    background:
-      "linear-gradient(to right, #3c1053, #ad5389)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */,
-    transition: "background 1s ease-out",
+    background: "#FBD3E9",
+    transition: "background 1s ease-in-out",
   },
 }));
 
@@ -78,7 +74,7 @@ const Bitcoin = () => {
     interval = setInterval(() => {
       setUpdated(true);
       fetchBitcoinPrices();
-    }, 60 * 1000); // Every minute the prices get updated ( as the api documentation says )
+    }, 6000); // Every minute the prices get updated ( as the api documentation says )
   };
 
   const cardClasses = cx({
